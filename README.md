@@ -52,7 +52,7 @@ Example plugin:
 
     public class ExampleCommand extends OSBUCommand {
         public ExampleCommand() {
-            super(OSBUExample.getInstance(), "osbuexample", 0); /* creates a new command which can be used in-game 																	   with "/osbuexample". 0 means this command has 0 args. */
+            super(OSBUExample.getInstance(), "osbuexample", 0); /* creates a new command which can be used in-game with "/osbuexample". 0 means this command has 0 args. */
             addSubCommand(new OSBUCommand(OSBUExample.getInstance(), "sub", 0) {
                 { /* a generic object initializer block */
                     addSubCommand(new OSBUCommand(OSBUExample.getInstance(), "sub1", 0) {
