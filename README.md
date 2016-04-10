@@ -1,8 +1,4 @@
 # OSBU
-### For Server Owners
-This plugin does absolutely nothing on its own. Some plugins, though, may require it to function properly (they will say if they require it).
-### For Developers
-See https://github.com/MCMastery/osbu
 Change the way you program Bukkit plugins. OSBU (Open-Source Bukkit Utilities) is a new way of writing plugins which is faster and easier. No need to register your commands in your `plugin.yml`. Create subcommands easily.
 
 #### Note: Please know how to program in Bukkit before using this. Don't ask questions like "wheredo i put teh publics`
@@ -46,17 +42,17 @@ Example plugin:
             return instance;
         }
     }
-    
+
 `ExampleCommand.java:`
 
 	package some.example.package;
-    
+
     import com.dgrissom.osbu.main.OSBUCommand;
     import com.dgrissom.osbu.main.utilities.PlayerUtility;
 
     public class ExampleCommand extends OSBUCommand {
         public ExampleCommand() {
-            super(OSBUExample.getInstance(), "osbuexample", 0); /* creates a new command which can be used in-game 																	   with "/osbuexample". 0 means this command has 0 args. */
+            super(OSBUExample.getInstance(), "osbuexample", 0); /* creates a new command which can be used in-game with "/osbuexample". 0 means this command has 0 args. */
             addSubCommand(new OSBUCommand(OSBUExample.getInstance(), "sub", 0) {
                 { /* a generic object initializer block */
                     addSubCommand(new OSBUCommand(OSBUExample.getInstance(), "sub1", 0) {
