@@ -32,7 +32,7 @@ Example plugin:
             instance = new PluginUtility(this) { /* this code will register our plugin with OSBU (you must have this!) */
                 @Override
                 public boolean enablePDFs() {
-                    return false; /* do not enable Player Data Files to be generated (not actually doing anything at this                                                                                       version of OSBU) */
+                    return false; /* do not enable Player Data Files to be generated (not actually doing anything at this version of OSBU) */
                 }
             }.register(); // registers our plugin with OSBU, with PDFs disabled now
             OSBU.getInstance().getCommands().registerCommand(new ExampleCommand()); /* registers a command (see below) */
