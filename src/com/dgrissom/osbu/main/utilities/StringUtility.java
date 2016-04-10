@@ -14,7 +14,7 @@ public class StringUtility extends OSBUUtility {
         return new StringUtility(ChatColor.translateAlternateColorCodes('&', this.string));
     }
     public StringUtility capitalize() {
-        return new StringUtility(Character.toUpperCase(this.string.charAt(0)) + this.string.substring(1));
+        return new StringUtility(Character.toUpperCase(this.string.charAt(0)) + this.string.substring(1).toLowerCase());
     }
 
     public StringUtility toUpperCase() {
