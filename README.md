@@ -108,6 +108,7 @@ https://gyazo.com/c0538093f384390aac8195ca6081a293
 The `true` at the end of `UpdatedText.generateCarousel` tells it to generate spaces at the end of our message, so it has "padding" when the message wraps around.
 
 This simple code will hide a scoreboard from a `PlayerUtility` object called `player`:
+
     player.removeScoreboard();
 
 This is an awful tutorial... if you want to make a tutorial, please do so! PM me (MCMastery) on dev.bukkit.org a link to a Youtube video. I will be uploading more examples later.
