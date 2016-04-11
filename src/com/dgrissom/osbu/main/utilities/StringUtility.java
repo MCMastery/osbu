@@ -5,7 +5,7 @@ import org.bukkit.ChatColor;
 public class StringUtility extends OSBUUtility {
     private final String string;
 
-    StringUtility(Object object) {
+    public StringUtility(Object object) {
         super(object);
         this.string = (String) object;
     }
