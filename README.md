@@ -1,5 +1,5 @@
 # OSBU
-Change the way you program Bukkit plugins. OSBU (Open-Source Bukkit Utilities) is a new way of writing plugins which is faster and easier. No need to register your commands in your `plugin.yml`. Create subcommands easily.
+Change the way you program Bukkit plugins. OSBU (Open-Source Bukkit Utilities) is a new way of writing plugins which is faster and easier. No need to register your commands in your `plugin.yml`. Create subcommands easily. OSBU provides many utility class and methods to help you finish your plugin faster.
 
 #### Note: Please know how to program in Bukkit before using this. Don't ask questions like "wheredo i put teh publics`
 
