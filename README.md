@@ -105,17 +105,17 @@ With a `PlayerUtility` object called `player`, this will show them their health 
     player.setScoreboard(scoreboard);
 
 Output:
-https://gyazo.com/c0538093f384390aac8195ca6081a293
+!["Output"](https://gyazo.com/c0538093f384390aac8195ca6081a293.gif "Output")
 (It does wrap around - this image doesn't show the whole output)
 The `true` at the end of `UpdatedText.generateCarousel` tells it to generate spaces at the end of our message, so it has "padding" when the message wraps around.
 
 Add this color changing method to the end of `generateCarousel` method:
 
-
     .generateColorChanger(new ChatColor[] {ChatColor.WHITE, ChatColor.GRAY, ChatColor.DARK_GRAY, ChatColor.BLACK, ChatColor.DARK_GRAY, ChatColor.GRAY});
 
-The code would now yield the output: https://gyazo.com/eff34a06c04a663a2aafc70f7d06a79d
+The code would now yield the output:
 
+!["Output"](https://gyazo.com/eff34a06c04a663a2aafc70f7d06a79d.gif "Output")
 This simple code will hide a scoreboard from a `PlayerUtility` object called `player`:
 
     player.removeScoreboard();
