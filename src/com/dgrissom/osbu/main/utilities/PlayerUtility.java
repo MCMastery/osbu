@@ -2,6 +2,8 @@ package com.dgrissom.osbu.main.utilities;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
 
 import java.util.UUID;
 
@@ -62,15 +64,34 @@ public class PlayerUtility extends OSBUUtility {
     public UUID getUniqueId() {
         return this.player.getUniqueId();
     }
-    public PlayerUtility sendFormattedMessage(String s) {
-        this.player.sendMessage(new StringUtility(s).format().toString());
+
+    public PlayerUtility sendFormattedMessage(Object msg) {
+        this.player.sendMessage(new StringUtility(String.valueOf(msg)).format().toString());
         return this;
     }
-    public void setScoreboard(ScoreboardUtility scoreboard) {
+
+    public PlayerUtility setScoreboard(ScoreboardUtility scoreboard) {
         this.player.setScoreboard(scoreboard.getObject());
+        return this;
     }
-    public void removeScoreboard() {
+    public PlayerUtility removeScoreboard() {
         this.player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
+        return this;
+    }
+
+    public InventoryUtility getInventory() {
+        return new InventoryUtility(this.player.getInventory());
+    }
+    public PlayerUtility updateInventory() {
+        this.player.updateInventory();
+        return this;
+    }
+    public PlayerUtility openInventory(InventoryUtility inventory) {
+        this.player.openInventory(inventory.getObject());
+        return this;
+    }
+    public InventoryView getOpenedInventory() {
+        return this.player.getOpenInventory();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.dgrissom.osbu.main;
 
 import com.dgrissom.osbu.main.utilities.StringUtility;
+import org.bukkit.ChatColor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -122,5 +123,24 @@ public class UpdatedText implements Iterable<String> {
         for (int frame = 0; frame < frameCount; frame++)
             frames.add(fullCarouselString.substring(frame, frame + frameLength));
         return new UpdatedText(fps, frames);
+    }
+
+
+
+
+    public static UpdatedText generateColorChanger(String text, ChatColor[] colors, int fps) {
+        List<String> frames = new ArrayList<>();
+        for (ChatColor color : colors)
+            frames.add(color + text);
+        return new UpdatedText(fps, frames);
+    }
+    // textFrames.length should be a multiple of colors.length for a complete pattern
+    public UpdatedText generateColorChanger(ChatColor[] colors) {
+        for (int i = 0, color = 0; i < this.textFrames.size(); i++, color++) {
+            if (color >= colors.length)
+                color = 0;
+            this.textFrames.set(i, colors[color] + this.textFrames.get(i));
+        }
+        return this;
     }
 }

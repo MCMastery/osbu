@@ -2,7 +2,11 @@ package com.dgrissom.osbu.main.utilities;
 
 import org.bukkit.ChatColor;
 
-public class StringUtility extends OSBUUtility {
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class StringUtility extends OSBUUtility implements Iterable<Character> {
     private final String string;
 
     public StringUtility(Object object) {
@@ -37,5 +41,12 @@ public class StringUtility extends OSBUUtility {
     @Override
     public String toString() {
         return this.string;
+    }
+    @Override
+    public Iterator<Character> iterator() {
+        List<Character> chars = new ArrayList<>();
+        for (char c : this.string.toCharArray())
+            chars.add(c);
+        return chars.iterator();
     }
 }

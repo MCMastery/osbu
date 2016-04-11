@@ -25,6 +25,14 @@ public class ArrayUtility extends OSBUUtility {
             stringArray[i] = String.valueOf(this.array[i]);
         return stringArray;
     }
+    public String join(String elementSeparator) {
+        String joined = "";
+        for (Object e : this.array)
+            joined += String.valueOf(e) + elementSeparator;
+        if (joined.endsWith(elementSeparator))
+            joined = joined.substring(0, joined.length() - elementSeparator.length());
+        return joined;
+    }
 
     @Override
     public Object[] getObject() {
