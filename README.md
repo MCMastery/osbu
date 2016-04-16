@@ -7,14 +7,7 @@ Change the way you program Bukkit plugins. OSBU (Open-Source Bukkit Utilities) i
 OSBU has many utility classes that consist of helpful methods. They provide helpful methods for various objects.
 
 
-#### Note: Internal classes, used by OSBU, are prefixed with "OSBU". You will never really need to use these classes (unless it is the class OSBU).
-List of utility classes:
-
-- `StringUtility`
-- `PlayerUtility`
-- `ArrayUtility`
-- `PluginUtility`
-- `ScoreboardUtility`
+#### Note: Internal classes, used by OSBU, are prefixed with "OSBU". You will never really need to use these classes (unless it is the class OSBU).`
 
 Example plugin:
 `OSBUExample.java:`
@@ -22,24 +15,17 @@ Example plugin:
 	package some.example.package;
 
     import com.dgrissom.osbu.main.OSBU;
-    import com.dgrissom.osbu.main.utilities.PluginUtility;
     import org.bukkit.plugin.java.JavaPlugin;
 
     public class OSBUExample extends JavaPlugin {
-        private static PluginUtility instance; /* allows us to reference this plugin later, as a PluginUtility */
+        private static JavaPlugin instance; /* allows us to reference this plugin later */
 
         @Override
         public void onEnable() {
-            instance = new PluginUtility(this) { /* this code will register our plugin with OSBU (you must have this!) */
-                @Override
-                public boolean enablePDFs() {
-                    return false; /* do not enable Player Data Files to be generated (not actually doing anything at this version of OSBU) */
-                }
-            }.register(); // registers our plugin with OSBU, with PDFs disabled now
             OSBU.getInstance().getCommands().registerCommand(new ExampleCommand()); /* registers a command (see below) */
         }
 
-        public static PluginUtility getInstance() { /* a method that lets us access the instance variable */
+        public static JavaPlugin getInstance() { /* a method that lets us access the instance variable */
             return instance;
         }
     }
@@ -53,16 +39,16 @@ Example plugin:
 
     public class ExampleCommand extends OSBUCommand {
         public ExampleCommand() {
-            super(OSBUExample.getInstance(), "osbuexample", 0); /* creates a new command which can be used in-game with "/osbuexample". 0 means this command has 0 args. */
-            addSubCommand(new OSBUCommand(OSBUExample.getInstance(), "sub", 0) {
+            super("osbuexample", null); /* creates a new command which can be used in-game with "/osbuexample". */
+            addSubCommand(new OSBUCommand("sub", null) {
                 { /* a generic object initializer block */
-                    addSubCommand(new OSBUCommand(OSBUExample.getInstance(), "sub1", 0) {
+                    addSubCommand(new OSBUCommand("sub1", null) {
                         @Override
                         public void execute(PlayerUtility sender, String[] args) {
                             sender.sendFormattedMessage("This is an OSBU example subsubcommand #1!");
                         }
                     });
-                    addSubCommand(new OSBUCommand(OSBUExample.getInstance(), "sub2", 0) {
+                    addSubCommand(new OSBUCommand("sub2", null) {
                         @Override
                         public void execute(PlayerUtility sender, String[] args) {
                             sender.sendFormattedMessage("This is an OSBU example subsubcommand #2!");

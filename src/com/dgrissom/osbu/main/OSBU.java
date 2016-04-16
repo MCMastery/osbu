@@ -8,21 +8,16 @@ public class OSBU extends JavaPlugin {
     private static OSBU instance;
     private OSBUCommands commands;
     private OSBUListeners listeners;
-    private OSBUPlugins plugins;
 
     @Override
     public void onEnable() {
         instance = this;
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
-        registerPlugins();
         registerListeners();
         registerCommands();
     }
 
-    private void registerPlugins() {
-        this.plugins = new OSBUPlugins();
-    }
     private void registerListeners() {
         this.listeners = new OSBUListeners();
         for (Listener listener : this.listeners)
@@ -36,9 +31,6 @@ public class OSBU extends JavaPlugin {
         return instance;
     }
 
-    public OSBUPlugins getPlugins() {
-        return this.plugins;
-    }
     public OSBUListeners getListeners() {
         return this.listeners;
     }

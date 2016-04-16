@@ -1,7 +1,9 @@
 package com.dgrissom.osbu.main.utilities;
 
 import com.dgrissom.osbu.main.events.InventoryClickSlotEvent;
+import com.dgrissom.osbu.main.events.InventoryExitEvent;
 import com.dgrissom.osbu.main.listeners.InventoryUtilityClickHandler;
+import com.dgrissom.osbu.main.listeners.InventoryUtilityCloseHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
@@ -10,11 +12,12 @@ import org.bukkit.inventory.ItemStack;
 import java.util.*;
 
 public class InventoryUtility extends OSBUUtility implements Iterable<ItemStack> {
-    public static final int SLOTS_PER_ROW;
+    public static final int SLOTS_PER_ROW, MAX_ROWS;
     private static final Set<InventoryUtility> INVENTORIES;
 
     static {
         SLOTS_PER_ROW = 9;
+        MAX_ROWS  = 6;
         INVENTORIES = new HashSet<>();
     }
 
@@ -22,6 +25,7 @@ public class InventoryUtility extends OSBUUtility implements Iterable<ItemStack>
     private UUID viewer;
     private boolean autoUnregister;
     private Set<InventoryUtilityClickHandler> clickHandlers;
+    private Set<InventoryUtilityCloseHandler> closeHandlers;
 
     public InventoryUtility(int rows, String title) {
         this(Bukkit.createInventory(null, rows * SLOTS_PER_ROW, new StringUtility(title).format().toString()));
@@ -32,6 +36,7 @@ public class InventoryUtility extends OSBUUtility implements Iterable<ItemStack>
         this.viewer = null;
         this.autoUnregister = true;
         this.clickHandlers = new HashSet<>();
+        this.closeHandlers = new HashSet<>();
     }
 
 
@@ -75,7 +80,7 @@ public class InventoryUtility extends OSBUUtility implements Iterable<ItemStack>
 
 
     /*
-    InventoryUtility allows Bukkit's built-in listener and event system, and this method, similar to Java's ActionListener used by Swing components
+    InventoryUtility allows Bukkit's built-in listener and event system, and these methods, similar to Java's ActionListener used by Swing components
      */
     public Set<InventoryUtilityClickHandler> getClickHandlers() {
         return this.clickHandlers;
@@ -93,6 +98,23 @@ public class InventoryUtility extends OSBUUtility implements Iterable<ItemStack>
             handler.onClick(evt);
         return this;
     }
+    
+    public Set<InventoryUtilityCloseHandler> getCloseHandlers() {
+        return this.closeHandlers;
+    }
+    public InventoryUtility addCloseHandler(InventoryUtilityCloseHandler handler) {
+        this.closeHandlers.add(handler);
+        return this;
+    }
+    public InventoryUtility removeCloseHandler(InventoryUtilityCloseHandler handler) {
+        this.closeHandlers.remove(handler);
+        return this;
+    }
+    public InventoryUtility triggerCloseHandlers(InventoryExitEvent evt) {
+        for (InventoryUtilityCloseHandler handler : this.closeHandlers)
+            handler.onClose(evt);
+        return this;
+    }
 
 
 
@@ -105,10 +127,13 @@ public class InventoryUtility extends OSBUUtility implements Iterable<ItemStack>
     public int getRows() {
         return this.inventory.getSize() / SLOTS_PER_ROW;
     }
+
+    public void clear() {
+        this.inventory.clear();
+    }
     public ItemStack getItem(int slot) {
         return this.inventory.getItem(slot);
     }
-
     public InventoryUtility setItem(int slot, ItemStack item) {
         this.inventory.setItem(slot, item);
         return this;

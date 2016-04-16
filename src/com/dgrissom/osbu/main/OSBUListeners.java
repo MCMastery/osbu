@@ -2,7 +2,8 @@ package com.dgrissom.osbu.main;
 
 import com.dgrissom.osbu.main.listeners.OSBUCommandListener;
 import com.dgrissom.osbu.main.listeners.OSBUInventoryClickListener;
-import com.dgrissom.osbu.main.listeners.OSBUInventoryCloseListener;
+import com.dgrissom.osbu.main.listeners.OSBUInventoryExitListener;
+import com.dgrissom.osbu.main.listeners.OSBUServerCommandListener;
 import org.bukkit.event.Listener;
 
 import java.util.Collections;
@@ -16,8 +17,9 @@ public final class OSBUListeners implements Iterable<Listener> {
     OSBUListeners() {
         this.listeners = new HashSet<>();
         this.listeners.add(new OSBUCommandListener());
+        this.listeners.add(new OSBUServerCommandListener());
         this.listeners.add(new OSBUInventoryClickListener());
-        this.listeners.add(new OSBUInventoryCloseListener());
+        this.listeners.add(new OSBUInventoryExitListener());
         Collections.unmodifiableSet(this.listeners);
     }
 

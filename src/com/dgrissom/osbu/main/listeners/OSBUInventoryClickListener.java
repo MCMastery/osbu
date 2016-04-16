@@ -19,7 +19,7 @@ public class OSBUInventoryClickListener implements Listener {
         InventoryUtility inventory = InventoryUtility.fromViewerId(evt.getWhoClicked().getUniqueId());
         if (inventory != null) {
             // implement the cancel method
-            InventoryClickSlotEvent clickSlotEvent = new InventoryClickSlotEvent(player, inventory, evt.getRawSlot()) {
+            InventoryClickSlotEvent clickSlotEvent = new InventoryClickSlotEvent(player, inventory, evt.getRawSlot(), evt.getClick()) {
                 @Override
                 public void setCancelled(boolean isCancelled) {
                     super.setCancelled(isCancelled);

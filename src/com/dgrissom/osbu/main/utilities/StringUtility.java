@@ -11,11 +11,14 @@ public class StringUtility extends OSBUUtility implements Iterable<Character> {
 
     public StringUtility(Object object) {
         super(object);
-        this.string = (String) object;
+        this.string = String.valueOf(object);
     }
 
     public StringUtility format() {
         return new StringUtility(ChatColor.translateAlternateColorCodes('&', this.string));
+    }
+    public StringUtility unformat() {
+        return new StringUtility(this.string.replace(ChatColor.COLOR_CHAR, '&'));
     }
     public StringUtility capitalize() {
         return new StringUtility(Character.toUpperCase(this.string.charAt(0)) + this.string.substring(1).toLowerCase());
@@ -32,6 +35,19 @@ public class StringUtility extends OSBUUtility implements Iterable<Character> {
     }
     public StringUtility substring(int begin, int end) {
         return new StringUtility(this.string.substring(begin, end));
+    }
+
+
+    public boolean isInteger() {
+        try {
+            Integer.parseInt(this.string);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+    public int parseInt() throws NumberFormatException {
+        return Integer.parseInt(this.string);
     }
 
     @Override
