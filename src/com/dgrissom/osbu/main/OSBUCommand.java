@@ -66,16 +66,33 @@ public abstract class OSBUCommand {
     /*
     header - {page} = current page
     header - {pages} = # of pages
+
+    shorthand - should this display entire command usage with args or without?
      */
-    public Book generateHelp(CommandSender sender, ChatColor cmdColor, ChatColor descColor, String header) {
+    public Book generateHelp(CommandSender sender, ChatColor cmdColor, ChatColor descColor, String header, boolean shorthand) {
         Book book = new Book();
-        for (OSBUCommand subCommand : this.subCommands)
-            if (subCommand.hasPermission(sender))
-                sender.sendMessage(cmdColor + subCommand.getUsage() + descColor + " - " + subCommand.getDescription());
+        genHelpCommand(book, this, sender, cmdColor, descColor, shorthand);
         // 10 lines - includes Headers
         book.generatePages(9);
         for (int pg = 0; pg < book.getPages(); pg++)
             book.insert(pg, 0, header.replace("{page}", String.valueOf(pg + 1)).replace("{pages}", String.valueOf(book.getPages())));
         return book;
+    }
+    private void genHelpCommand(Book book, OSBUCommand cmd, CommandSender sender, ChatColor cmdColor, ChatColor descColor, boolean shorthand) {
+        if (cmd.hasPermission(sender) && cmd.getDescription() != null) {
+            String usage = cmd.getUsage();
+            if (shorthand) {
+                usage = "";
+                for (int i = 0; i < cmd.getUsage().length(); i++) {
+                    char c = cmd.getUsage().charAt(i);
+                    if (c == '[' || c == '<' || c == '(' || c == '{')
+                        break;
+                    usage += c;
+                }
+            }
+            usage = usage.trim();
+            book.append(cmdColor + usage + descColor + " - " + cmd.getDescription());
+        } for (OSBUCommand subCommand : cmd.getSubCommands())
+            genHelpCommand(book, subCommand, sender, cmdColor, descColor, shorthand);
     }
 }
